@@ -1,6 +1,8 @@
 package eservis.app.web.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +40,16 @@ public class ExamController {
 	ExamPeriodService examPeriodService;
 	
 
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<ExamDTO>> getExams(){
+		List<Exam> exams = examService.findAll();
+		List<ExamDTO> examsDTO = new ArrayList<ExamDTO>();
+		for(Exam e : exams) {
+			examsDTO.add(new ExamDTO(e));
+		}
+		return new ResponseEntity<List<ExamDTO>>(examsDTO, HttpStatus.OK);
+	}
+	
 	//dodaj ispit
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<ExamDTO> createExam(@RequestBody ExamDTO examDTO) {

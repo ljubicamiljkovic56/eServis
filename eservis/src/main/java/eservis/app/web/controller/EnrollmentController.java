@@ -1,6 +1,8 @@
 package eservis.app.web.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,7 @@ import eservis.app.service.StudentService;
 import eservis.app.web.dto.EnrollmentDTO;
 
 @RestController
-@RequestMapping(value="api/enrollment")
+@RequestMapping(value="api/enrollments")
 public class EnrollmentController {
 
 	@Autowired
@@ -31,6 +33,16 @@ public class EnrollmentController {
 	
 	@Autowired
 	CourseService courseService;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<EnrollmentDTO>> getEnrollments(){
+		List<Enrollment> enrollments = enrollmentService.findAll();
+		List<EnrollmentDTO> enrollmentsDTO = new ArrayList<EnrollmentDTO>();
+		for(Enrollment en : enrollments) {
+			enrollmentsDTO.add(new EnrollmentDTO(en));
+		}
+		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentsDTO, HttpStatus.OK);
+	}
 	
 	//dodaj pohadjanje kursa
 	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
