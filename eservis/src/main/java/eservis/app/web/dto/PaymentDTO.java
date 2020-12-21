@@ -2,6 +2,8 @@ package eservis.app.web.dto;
 
 import java.util.Date;
 
+import eservis.app.model.Payment;
+
 public class PaymentDTO {
 	
 private Long id;
@@ -40,6 +42,18 @@ private Long id;
 		this.datum = datum;
 	}
 
+	public PaymentDTO(Payment payment) {
+		id = payment.getId();
+		student = new StudentDTO(payment.getStudent());
+		svrha = payment.getSvrha();
+		primalac = payment.getPrimalac();
+		amount = payment.getAmount();
+		racun = payment.getRacun();
+		model = payment.getModel();
+		pozivNaBroj = payment.getPozivNaBroj();
+		datum = payment.getDatum();
+	}
+	
 	public Long getId() {
 		return id;
 	}

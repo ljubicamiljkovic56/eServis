@@ -81,10 +81,10 @@ insert into student (card_number, first_name, last_name) values ('sf8-2014', 'Pe
 insert into student (card_number, first_name, last_name) values ('sf9-2014', 'Igor', 'Jovin');
 
 -- tbl za dokumente i tipove dokumenata
-insert into document_type (name) values ('UPISNICA');
-insert into document_type (name) values ('ISPISNICA');
-insert into document_type (name) values ('DIPLOMA');
-insert into document_type (name) values ('UVERENJE');
+insert into document_type(name) values ('UPISNICA');
+insert into document_type(name) values ('ISPISNICA');
+insert into document_type(name) values ('DIPLOMA');
+insert into document_type(name) values ('UVERENJE');
 
 insert into document (document_types_id, student_id) values (1, 1);
 insert into document (document_types_id, student_id) values (1, 4);
@@ -137,35 +137,35 @@ insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_
 insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_points) values (
 	2, 2, 2, '2016-04-19', 17, 57);
 
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, primalac, amount, racun, model, poziv_na_broj, datum) 
 	values (1, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-178', '2020-08-25');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, primalac, amount, racun, model, poziv_na_broj, datum) 
 	values (1, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-178', '2020-06-05');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+--insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (2, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-123', '2020-08-20');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+--insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (3, 'Prijava ispita', 'FTN', 200.00, '840-1710666-12', 97, '33-99011-1-4532-144', '2020-08-27');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (3, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-168', '2020-06-17');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (4, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-188', '2020-08-25');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (4, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-188', '2020-06-05');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (5, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-134', '2020-08-20');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 values (5, 'Prijava ispita', 'FTN', 800.00, '840-1710666-12', 97, '33-99011-1-4532-134', '2020-05-27');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (6, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-160', '2020-06-17');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (6, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-160', '2020-08-25');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (7, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-170', '2020-06-05');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (7, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-170', '2020-08-20');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (8, 'Prijava ispita', 'FTN', 600.00, '840-1710666-12', 97, '33-99011-1-4532-100', '2020-08-27');
-insert into payment (student_id, reason_for_payment, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
+	insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (8, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-100', '2020-06-17');
 
 
