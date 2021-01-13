@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import eservis.app.web.dto.ExamDTO;
 import eservis.app.web.dto.ExamPeriodDTO;
 import eservis.app.web.dto.StudentDTO;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value="api/students")
 public class StudentController {
@@ -34,7 +36,7 @@ public class StudentController {
 	private StudentService studentService;
 	
 	//svi studenti
-	@RequestMapping(value="/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentDTO>> getAllStudents() {
 		List<Student> students = studentService.findAll();
 		//convert students to DTOs
@@ -60,7 +62,7 @@ public class StudentController {
 	}
 	
 	//student po id-u
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<StudentDTO> getStudent(@PathVariable Long id){
 		Student student = studentService.findOne(id);
 		if(student == null){
@@ -70,7 +72,7 @@ public class StudentController {
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO){
 		Student student = new Student();
 		student.setCardNumber(studentDTO.getCardNumber());
@@ -81,8 +83,9 @@ public class StudentController {
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.CREATED);	
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
-	public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO studentDTO){
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "updateStudent/{id}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<StudentDTO> updateStudent(@PathVariable("id") long id, @RequestBody StudentDTO studentDTO){
 		//a student must exist
 		Student student = studentService.findOne(studentDTO.getId()); 
 		if (student == null) {
@@ -97,7 +100,7 @@ public class StudentController {
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);	
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStudent(@PathVariable Long id){
 		Student student = studentService.findOne(id);
 		if (student != null){
@@ -108,7 +111,7 @@ public class StudentController {
 		}
 	}
 	
-	@RequestMapping(value="/findCard", method=RequestMethod.GET)
+	@RequestMapping(value = "/findCard", method = RequestMethod.GET)
 	public ResponseEntity<StudentDTO> getStudentByCard(
 			@RequestParam String cardNumber) {
 		Student student = studentService.findByCard(cardNumber);

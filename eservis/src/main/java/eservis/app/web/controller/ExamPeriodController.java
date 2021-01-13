@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import eservis.app.web.dto.ExamDTO;
 import eservis.app.web.dto.ExamPeriodDTO;
 import eservis.app.web.dto.StudentDTO;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value="api/examPeriods")
 public class ExamPeriodController {
