@@ -106,9 +106,9 @@ insert into enrollment (start_date, end_date, student_id, course_id) values ('20
 insert into enrollment (start_date, end_date, student_id, course_id) values ('2015-01-01', '2015-06-01', 6, 2);
 
 -- obrisala sam rank
-insert into teacher (first_name, last_name) values ('Milan', 'Jovanovic');
-insert into teacher (first_name, last_name) values ('Sanja', 'Stanic');
-insert into teacher (first_name, last_name) values ('Nemanja', 'Jankovic');
+insert into teacher (first_name, last_name, title) values ('Milan', 'Jovanovic', 'nastavnik');
+insert into teacher (first_name, last_name, title) values ('Sanja', 'Stanic', 'asistent');
+insert into teacher (first_name, last_name, title) values ('Nemanja', 'Jankovic', 'demonstrator');
 
 -- ove dve tabele sam dodala
 insert into title (name) values ('DOCENT');

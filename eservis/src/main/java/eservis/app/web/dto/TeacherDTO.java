@@ -10,19 +10,22 @@ public class TeacherDTO {
 	
 	private String lastName;
 	
+	private String title;
+	
 	public TeacherDTO() {
 		
 	}
 
 	public TeacherDTO(Teacher teacher) {
-		this(teacher.getId(), teacher.getFirstName(), teacher.getLastName());
+		this(teacher.getId(), teacher.getFirstName(), teacher.getLastName(),teacher.getTitle());
 	}
 
-	public TeacherDTO(Long id, String firstName, String lastName) {
+	public TeacherDTO(Long id, String firstName, String lastName, String title) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.title = title;
 	}
 
 	public Long getId() {
@@ -48,4 +51,14 @@ public class TeacherDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
 }

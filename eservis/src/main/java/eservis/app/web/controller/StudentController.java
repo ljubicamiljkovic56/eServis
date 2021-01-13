@@ -62,7 +62,7 @@ public class StudentController {
 	}
 	
 	//student po id-u
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "studentDetails/{id}", method = RequestMethod.GET)
 	public ResponseEntity<StudentDTO> getStudent(@PathVariable Long id){
 		Student student = studentService.findOne(id);
 		if(student == null){
@@ -100,7 +100,7 @@ public class StudentController {
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);	
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteStudent/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteStudent(@PathVariable Long id){
 		Student student = studentService.findOne(id);
 		if (student != null){

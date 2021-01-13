@@ -24,7 +24,7 @@ import eservis.app.web.dto.TeacherDTO;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value="api/teachers")
+@RequestMapping(value = "api/teachers")
 public class TeacherController {
 	
 	@Autowired
@@ -57,7 +57,7 @@ public class TeacherController {
 	
 	
 	//nadji nastavnika po id-u
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "teacherDetails/{id}", method = RequestMethod.GET)
 	public ResponseEntity<TeacherDTO> getTeacher(@PathVariable Long id){
 		Teacher teacher = teacherService.findOne(id);
 		if(teacher == null){
@@ -68,7 +68,7 @@ public class TeacherController {
 	}
 	
 	//dodaj nastavnika
-	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<TeacherDTO> saveTeacher(@RequestBody
 			TeacherDTO teacherDTO){
 		Teacher teacher = new Teacher();
@@ -81,8 +81,8 @@ public class TeacherController {
 	
 	
 	//izmeni nastavnika
-	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
-	public ResponseEntity<TeacherDTO> updateTeacher(@RequestBody TeacherDTO teacherDTO){
+	@RequestMapping(value = "updateTeacher/{id}", method = RequestMethod.PUT, consumes="application/json")
+	public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable("id") long id, @RequestBody TeacherDTO teacherDTO){
 		//a teacher must exist
 		Teacher teacher = teacherService.findOne(teacherDTO.getId()); 
 		if (teacher == null) {
@@ -98,7 +98,7 @@ public class TeacherController {
 	
 	
 	//obrisi nastavnika
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value= "deleteTeacher/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteTeacher(@PathVariable Long id){
 		Teacher teacher = teacherService.findOne(id);
 		if (teacher != null){

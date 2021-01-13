@@ -23,6 +23,8 @@ public class Teacher {
 	
 	private String lastName;
 	
+	private String title;
+	
 	@ManyToMany
 	@JoinTable(name = "teacher_title",
             joinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"),
@@ -84,10 +86,27 @@ public class Teacher {
         return Objects.hashCode(id);
     }
 
-	@Override
-	public String toString() {
-		return "Teacher [id=" + id + ", firstName=" + firstName + ", lastName="
-				+ lastName + "]";
+	public String getTitle() {
+		return title;
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Set<Title> getTitles() {
+		return titles;
+	}
+
+	public void setTitles(Set<Title> titles) {
+		this.titles = titles;
+	}
+
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", title=" + title
+				+ ", titles=" + titles + ", courses=" + courses + "]";
+	}
+
+	
 }
