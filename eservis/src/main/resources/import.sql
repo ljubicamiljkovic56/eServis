@@ -1,10 +1,6 @@
--- drop database tseo;
--- create database tseo;
--- koristi db tseo
 use tseo;
 
 set foreign_key_checks = 0;
-
 
 -- delete all rows
 truncate table user_authority;
@@ -18,14 +14,11 @@ truncate table course;
 truncate table teacher;
 truncate table exam_period;
 
-truncate table title;
-truncate table teacher_title;
 truncate table document;
 truncate table document_type;
 truncate table admin;
 truncate table payment;
 truncate table lecture;
-
 
 set foreign_key_checks = 1;
 
@@ -105,19 +98,10 @@ insert into enrollment (start_date, end_date, student_id, course_id) values ('20
 insert into enrollment (start_date, end_date, student_id, course_id) values ('2015-01-01', '2015-06-01', 5, 1);
 insert into enrollment (start_date, end_date, student_id, course_id) values ('2015-01-01', '2015-06-01', 6, 2);
 
--- obrisala sam rank
 insert into teacher (first_name, last_name, title) values ('Milan', 'Jovanovic', 'nastavnik');
 insert into teacher (first_name, last_name, title) values ('Sanja', 'Stanic', 'asistent');
 insert into teacher (first_name, last_name, title) values ('Nemanja', 'Jankovic', 'demonstrator');
 
--- ove dve tabele sam dodala
-insert into title (name) values ('DOCENT');
-insert into title (name) values ('ASISTENT');
-insert into title (name) values ('DEMONSTRATOR');
-
-insert into teacher_title (teacher_id, title_id) values (1, 1);
-insert into teacher_title (teacher_id, title_id) values (2, 2);
-insert into teacher_title (teacher_id, title_id) values (3, 3);
 
 insert into teaching (course_id, teacher_id) values (1, 1);
 insert into teaching (course_id, teacher_id) values (1, 2);
@@ -138,10 +122,7 @@ insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_
 insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_points) values (
 	2, 2, 2, '2016-04-19', 17, 57);
 
---insert into payment (student_id, svrha, primalac, amount, racun, model, poziv_na_broj, datum) 
-	--values (1, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-178', '2020-08-25');
---insert into payment (student_id, svrha, primalac, amount, racun, model, poziv_na_broj, datum) 
-	--values (1, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-178', '2020-06-05');
+
 insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (2, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-123', '2020-08-20');
 	insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 

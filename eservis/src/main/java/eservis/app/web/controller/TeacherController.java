@@ -74,6 +74,7 @@ public class TeacherController {
 		Teacher teacher = new Teacher();
 		teacher.setFirstName(teacherDTO.getFirstName());
 		teacher.setLastName(teacherDTO.getLastName());
+		teacher.setTitle(teacherDTO.getTitle());
 		
 		teacher = teacherService.save(teacher);
 		return new ResponseEntity<>(new TeacherDTO(teacher), HttpStatus.CREATED);	
@@ -91,6 +92,7 @@ public class TeacherController {
 		
 		teacher.setFirstName(teacherDTO.getFirstName());
 		teacher.setLastName(teacherDTO.getLastName());
+		teacher.setTitle(teacherDTO.getTitle());
 		
 		teacher = teacherService.save(teacher);
 		return new ResponseEntity<>(new TeacherDTO(teacher), HttpStatus.OK);	
