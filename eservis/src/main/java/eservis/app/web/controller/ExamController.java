@@ -69,7 +69,7 @@ public class ExamController {
 		}
 
 		Exam exam = new Exam();
-		exam.setDate((Date) examDTO.getDate());
+		exam.setDatum((Date) examDTO.getDatum());
 		exam.setExamPoints(examDTO.getExamPoints());
 		exam.setLabPoints(examDTO.getLabPoints());
 		exam.setStudent(student);
@@ -89,7 +89,7 @@ public class ExamController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		// we allow changing date and points for an exam only
-		exam.setDate((Date) examDTO.getDate());
+		exam.setDatum((Date) examDTO.getDatum());
 		exam.setExamPoints(examDTO.getExamPoints());
 		exam.setLabPoints(examDTO.getLabPoints());
 

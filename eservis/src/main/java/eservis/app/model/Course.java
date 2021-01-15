@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 
@@ -23,6 +24,13 @@ public class Course {
 	private Long id;
 	
 	String name;
+	
+	int espb;
+	
+	String semester;
+	
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private Teacher teacher;
 	
 	@OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Enrollment> enrollments = new HashSet<Enrollment>();
@@ -96,8 +104,37 @@ public class Course {
         return Objects.hashCode(id);
     }
 
+	public int getEspb() {
+		return espb;
+	}
+
+	public void setEspb(int espb) {
+		this.espb = espb;
+	}
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", name=" + name + "]";
-	}	
+		return "Course [id=" + id + ", name=" + name + ", espb=" + espb + ", semester=" + semester + ", enrollments="
+				+ enrollments + ", exams=" + exams + ", teachers=" + teachers + "]";
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	
+
+
 }

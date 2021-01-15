@@ -84,9 +84,20 @@ insert into document (document_types_id, student_id) values (1, 1);
 insert into document (document_types_id, student_id) values (1, 4);
 insert into document (document_types_id, student_id) values (2, 1);
 
-insert into course (name) values ('Matematika');
-insert into course (name) values ('Osnove programiranja');
-insert into course (name) values ('Objektno programiranje');
+
+
+
+insert into teacher (first_name, last_name, title) values ('Milan', 'Jovanovic', 'nastavnik');
+insert into teacher (first_name, last_name, title) values ('Sanja', 'Stanic', 'asistent');
+insert into teacher (first_name, last_name, title) values ('Nemanja', 'Jankovic', 'demonstrator');
+
+insert into course (name, espb, semester, teacher_id) values ('Matematika', 8, 'zimski', 1);
+insert into course (name, espb, semester, teacher_id) values ('Osnove programiranja', 8, 'zimski', 2);
+insert into course (name, espb, semester, teacher_id) values ('Objektno programiranje', 6, 'letnji', 3);
+
+insert into teaching (course_id, teacher_id) values (1, 1);
+insert into teaching (course_id, teacher_id) values (2, 2);
+insert into teaching (course_id, teacher_id) values (3, 3);
 
 insert into enrollment (start_date, end_date, student_id, course_id) values ('2015-01-01', '2015-06-01', 1, 1);
 insert into enrollment (start_date, end_date, student_id, course_id) values ('2015-01-01', '2015-06-01', 2, 1);
@@ -98,28 +109,19 @@ insert into enrollment (start_date, end_date, student_id, course_id) values ('20
 insert into enrollment (start_date, end_date, student_id, course_id) values ('2015-01-01', '2015-06-01', 5, 1);
 insert into enrollment (start_date, end_date, student_id, course_id) values ('2015-01-01', '2015-06-01', 6, 2);
 
-insert into teacher (first_name, last_name, title) values ('Milan', 'Jovanovic', 'nastavnik');
-insert into teacher (first_name, last_name, title) values ('Sanja', 'Stanic', 'asistent');
-insert into teacher (first_name, last_name, title) values ('Nemanja', 'Jankovic', 'demonstrator');
-
-
-insert into teaching (course_id, teacher_id) values (1, 1);
-insert into teaching (course_id, teacher_id) values (1, 2);
-insert into teaching (course_id, teacher_id) values (2, 2);
-insert into teaching (course_id, teacher_id) values (3, 3);
 
 insert into exam_period (name, start_date, end_date) values ('Januarski 2020', '2020-01-27', '2020-02-25');
 insert into exam_period (name, start_date, end_date) values ('Aprilski 2020', '2020-04-18', '2020-04-23');
 insert into exam_period (name, start_date, end_date) values ('Junski 2020', '2020-06-15', '2020-07-14');
 insert into exam_period (name, start_date, end_date) values ('Septembarski 2020', '2020-08-27', '2020-09-25');
 
-insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_points) values (
+insert into exam (student_id, course_id, exam_period_id, datum, exam_points, lab_points) values (
 	1, 1, 1, '2016-02-01', 20, 70);
-insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_points) values (
+insert into exam (student_id, course_id, exam_period_id, datum, exam_points, lab_points) values (
 	1, 2, 2, '2016-04-19', 15, 55);
-insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_points) values (
+insert into exam (student_id, course_id, exam_period_id, datum, exam_points, lab_points) values (
 	2, 1, 1, '2016-02-01', 18, 60);
-insert into exam (student_id, course_id, exam_period_id, date, exam_points, lab_points) values (
+insert into exam (student_id, course_id, exam_period_id, datum, exam_points, lab_points) values (
 	2, 2, 2, '2016-04-19', 17, 57);
 
 
@@ -150,4 +152,4 @@ insert into payment (student_id, svrha, receiver, amount, recievers_account, mod
 	insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
 	values (8, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-100', '2020-06-17');
 
-insert into lecture(id, course_id) values (1,1);
+insert into lecture(course_id) values (1);

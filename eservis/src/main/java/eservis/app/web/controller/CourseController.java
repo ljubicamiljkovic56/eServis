@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import eservis.app.model.Course;
 import eservis.app.model.Enrollment;
 import eservis.app.model.Exam;
+import eservis.app.model.Teacher;
 import eservis.app.service.CourseService;
+import eservis.app.service.TeacherService;
 import eservis.app.web.dto.CourseDTO;
 import eservis.app.web.dto.EnrollmentDTO;
 import eservis.app.web.dto.ExamDTO;
@@ -26,11 +28,14 @@ import eservis.app.web.dto.StudentDTO;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value="api/courses")
+@RequestMapping(value = "api/courses")
 public class CourseController {
 	
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private TeacherService teacherService;
 	
 	//svi kursevi
 	@RequestMapping(method = RequestMethod.GET)
@@ -45,7 +50,7 @@ public class CourseController {
 	}
 	
 	//po id-u
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "courseDetails/{id}", method = RequestMethod.GET)
 	public ResponseEntity<CourseDTO> getCourse(@PathVariable Long id){
 		Course course = courseService.findOne(id);
 		if(course == null){
@@ -56,33 +61,43 @@ public class CourseController {
 	}
 	
 	//novi kurs
-	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<CourseDTO> saveCourse(@RequestBody CourseDTO courseDTO){
+		if (courseDTO.getTeacher() == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}		
+		Teacher teacher =  teacherService.findOne(courseDTO.getTeacher().getId());
+		
 		Course course = new Course();
 		course.setName(courseDTO.getName());
-	
+		course.setEspb(courseDTO.getEspb());
+		course.setSemester(courseDTO.getSemester());
+		course.setTeacher(teacher);
 		course = courseService.save(course);
 		return new ResponseEntity<>(new CourseDTO(course), HttpStatus.CREATED);	
 	}
 	
 	//izmeni kurs
-	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
-	public ResponseEntity<CourseDTO> updateCourse(@RequestBody CourseDTO courseDTO){
+	@RequestMapping(value = "updateCourse/{id}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<CourseDTO> updateCourse(@PathVariable("id") long id, @RequestBody CourseDTO courseDTO){
 		//a course must exist
 		Course course = courseService.findOne(courseDTO.getId()); 
 		if (course == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		Teacher teacher =  teacherService.findOne(courseDTO.getTeacher().getId());
 		
 		course.setName(courseDTO.getName());
-	
+		course.setEspb(courseDTO.getEspb());
+		course.setSemester(courseDTO.getSemester());
+		course.setTeacher(teacher);
 		course = courseService.save(course);
 		return new ResponseEntity<>(new CourseDTO(course), HttpStatus.OK);	
 	}
 	
 	
 	//obrisi kurs
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value = "deleteCourse/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteCourse(@PathVariable Long id){
 		Course course = courseService.findOne(id);
 		if (course != null){
@@ -124,7 +139,7 @@ public class CourseController {
 			examDTO.setId(e.getId());
 			examDTO.setExamPoints(e.getExamPoints());
 			examDTO.setLabPoints(e.getLabPoints());
-			examDTO.setDate(e.getDate());
+			examDTO.setDatum(e.getDatum());
 			examDTO.setStudent(new StudentDTO(e.getStudent()));
 			examDTO.setExamPeriod(new ExamPeriodDTO(e.getExamPeriod()));
 		

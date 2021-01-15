@@ -9,7 +9,7 @@ public class ExamDTO {
 	private Long id;
     private Integer examPoints;
     private Integer labPoints;
-    private Date date;
+    private Date datum;
 	private CourseDTO course;
 	private StudentDTO student;
 	private ExamPeriodDTO examPeriod;
@@ -22,7 +22,7 @@ public class ExamDTO {
 		id = exam.getId();
 		examPoints = exam.getExamPoints();
 		labPoints = exam.getLabPoints();
-		date = exam.getDate();
+		datum = exam.getDatum();
 		course = new CourseDTO(exam.getCourse());
 		student = new StudentDTO(exam.getStudent());
 		examPeriod = new ExamPeriodDTO(exam.getExamPeriod());
@@ -46,11 +46,11 @@ public class ExamDTO {
 	public void setLabPoints(Integer labPoints) {
 		this.labPoints = labPoints;
 	}
-	public Date getDate() {
-		return date;
+	public Date getDatum() {
+		return datum;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDatum(Date datum) {
+		this.datum = datum;
 	}
 	public CourseDTO getCourse() {
 		return course;

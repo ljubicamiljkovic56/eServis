@@ -21,7 +21,7 @@ public class Exam {
     
     private Integer labPoints;
     
-    private Date date;
+    private Date datum;
     
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Course course;
@@ -56,12 +56,12 @@ public class Exam {
 		this.labPoints = labPoints;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDatum() {
+		return datum;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDatum(Date datum) {
+		this.datum = datum;
 	}
 
 	public Course getCourse() {

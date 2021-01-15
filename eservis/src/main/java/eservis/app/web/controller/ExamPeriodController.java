@@ -118,7 +118,7 @@ public class ExamPeriodController {
 			examDTO.setId(e.getId());
 			examDTO.setExamPoints(e.getExamPoints());
 			examDTO.setLabPoints(e.getLabPoints());
-			examDTO.setDate(e.getDate());
+			examDTO.setDatum(e.getDatum());
 			examDTO.setCourse(new CourseDTO(e.getCourse()));
 			examDTO.setStudent(new StudentDTO(e.getStudent()));
 		

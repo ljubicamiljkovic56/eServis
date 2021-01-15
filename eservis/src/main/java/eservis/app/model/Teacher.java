@@ -4,11 +4,15 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Teacher {
@@ -22,6 +26,9 @@ public class Teacher {
 	private String lastName;
 	
 	private String title;
+	
+	@OneToMany(mappedBy = "teachers", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Course> courses2 = new HashSet<Course>();
 	
 	@ManyToMany(mappedBy = "teachers")
 	private Set<Course> courses = new HashSet<Course>();
@@ -91,5 +98,18 @@ public class Teacher {
 		return "Teacher [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", title=" + title
 				+ ", courses=" + courses + "]";
 	}
+
+	
+	
+	public Set<Course> getCourses2() {
+		return courses2;
+	}
+
+	public void setCourses2(Set<Course> courses2) {
+		this.courses2 = courses2;
+	}
+
+	
+
 	
 }
