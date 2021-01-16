@@ -15,7 +15,7 @@ truncate table teacher;
 truncate table exam_period;
 
 truncate table document;
-truncate table document_type;
+truncate table type;
 truncate table admin;
 truncate table payment;
 truncate table lecture;
@@ -75,14 +75,14 @@ insert into student (card_number, first_name, last_name) values ('sf8-2014', 'Pe
 insert into student (card_number, first_name, last_name) values ('sf9-2014', 'Igor', 'Jovin');
 
 -- tbl za dokumente i tipove dokumenata
-insert into document_type(name) values ('UPISNICA');
-insert into document_type(name) values ('ISPISNICA');
-insert into document_type(name) values ('DIPLOMA');
-insert into document_type(name) values ('UVERENJE');
+insert into type(name) values ('UPISNICA');
+insert into type(name) values ('ISPISNICA');
+insert into type(name) values ('DIPLOMA');
+insert into type(name) values ('UVERENJE');
 
-insert into document (document_types_id, student_id) values (1, 1);
-insert into document (document_types_id, student_id) values (1, 4);
-insert into document (document_types_id, student_id) values (2, 1);
+insert into document (type_id, student_id) values (1, 1);
+insert into document (type_id, student_id) values (1, 4);
+insert into document (type_id, student_id) values (2, 1);
 
 
 

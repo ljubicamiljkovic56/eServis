@@ -32,6 +32,9 @@ public class Student {
 	
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Exam> exams = new HashSet<Exam>();
+	
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Document> documents = new HashSet<Document>();
 
 	public Long getId() {
 		return id;
@@ -79,6 +82,16 @@ public class Student {
 
 	public void setExams(Set<Exam> exams) {
 		this.exams = exams;
+	}
+	
+	
+
+	public Set<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(Set<Document> documents) {
+		this.documents = documents;
 	}
 
 	@Override
