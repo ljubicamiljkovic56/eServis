@@ -8,8 +8,8 @@ public class ExamPeriodDTO {
 	
 	private Long id;
 	private String name;
-	private Date startDate;
-	private Date endDate;
+	private java.sql.Date startDate;
+	private java.sql.Date endDate;
 	
 	public ExamPeriodDTO() {
 		
@@ -24,8 +24,8 @@ public class ExamPeriodDTO {
 		super();
 		this.id = id;
 		this.name = name;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.startDate = (java.sql.Date) startDate;
+		this.endDate = (java.sql.Date) endDate;
 	}
 
 	public Long getId() {
@@ -48,7 +48,7 @@ public class ExamPeriodDTO {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(java.sql.Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -56,7 +56,7 @@ public class ExamPeriodDTO {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(java.sql.Date endDate) {
 		this.endDate = endDate;
 	}
 

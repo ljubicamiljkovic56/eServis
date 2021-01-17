@@ -52,6 +52,17 @@ public class ExamController {
 		return new ResponseEntity<List<ExamDTO>>(examsDTO, HttpStatus.OK);
 	}
 	
+	//po id-u
+	@RequestMapping(value = "examDetails/{id}", method = RequestMethod.GET)
+	public ResponseEntity<ExamDTO> getExam(@PathVariable Long id){
+		Exam exam = examService.findOne(id);
+		if(exam == null){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+			
+		return new ResponseEntity<>(new ExamDTO(exam), HttpStatus.OK);
+	}
+	
 	//dodaj ispit
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<ExamDTO> createExam(@RequestBody ExamDTO examDTO) {
@@ -81,8 +92,8 @@ public class ExamController {
 	}
 
 	//izmeni ispit
-	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
-	public ResponseEntity<ExamDTO> updateExam(@RequestBody ExamDTO examDTO) {
+	@RequestMapping(value = "updateExam/{id}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<ExamDTO> updateExam(@PathVariable("id") long id, @RequestBody ExamDTO examDTO) {
 		// an exam must exist
 		Exam exam = examService.findOne(examDTO.getId());
 		if (exam == null) {
@@ -98,7 +109,7 @@ public class ExamController {
 	}
 
 	//obrisi ispit
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteExam/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteExam(@PathVariable Long id) {
 		Exam exam = examService.findOne(id);
 		if (exam != null) {

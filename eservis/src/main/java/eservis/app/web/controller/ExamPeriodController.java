@@ -27,13 +27,13 @@ import eservis.app.web.dto.StudentDTO;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value="api/examPeriods")
+@RequestMapping(value = "api/examperiods")
 public class ExamPeriodController {
 
 	@Autowired
 	private ExamPeriodService examPeriodService;
 	
-	@RequestMapping(value="/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<ExamPeriodDTO>> getAllExamPeriods() {
 		List<ExamPeriod> examPeriods = examPeriodService.findAll();
 		//convert examPeriods to DTOs
@@ -58,7 +58,7 @@ public class ExamPeriodController {
 		return new ResponseEntity<>(examPeriodsDTO, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "examPeriodDetails/{id}", method=RequestMethod.GET)
 	public ResponseEntity<ExamPeriodDTO> getExamPeriod(@PathVariable Long id){
 		ExamPeriod examPeriod = examPeriodService.findOne(id);
 		if(examPeriod == null){
@@ -68,7 +68,7 @@ public class ExamPeriodController {
 		return new ResponseEntity<>(new ExamPeriodDTO(examPeriod), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
+	@RequestMapping(method = RequestMethod.POST, consumes="application/json")
 	public ResponseEntity<ExamPeriodDTO> saveExamPeriod(@RequestBody ExamPeriodDTO examPeriodDTO){
 		ExamPeriod examPeriod = new ExamPeriod();
 		
@@ -80,8 +80,9 @@ public class ExamPeriodController {
 		return new ResponseEntity<>(new ExamPeriodDTO(examPeriod), HttpStatus.CREATED);	
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
-	public ResponseEntity<ExamPeriodDTO> updateExamPeriod(@RequestBody ExamPeriodDTO examPeriodDTO){
+	@RequestMapping(value = "updateExamPeriod/{id}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<ExamPeriodDTO> updateExamPeriod(@PathVariable("id") long id,
+			@RequestBody ExamPeriodDTO examPeriodDTO){
 		//a examPeriod must exist
 		ExamPeriod examPeriod = examPeriodService.findOne(examPeriodDTO.getId()); 
 		if (examPeriod == null) {
@@ -96,7 +97,7 @@ public class ExamPeriodController {
 		return new ResponseEntity<>(new ExamPeriodDTO(examPeriod), HttpStatus.OK);	
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value = "deleteExamPeriod/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteExamPeriod(@PathVariable Long id){
 		ExamPeriod examPeriod = examPeriodService.findOne(id);
 		if (examPeriod != null){

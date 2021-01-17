@@ -22,9 +22,9 @@ public class ExamPeriod {
 	
 	private String name;
 	
-	private Date startDate;
+	private java.sql.Date startDate;
 	
-	private Date endDate;
+	private java.sql.Date endDate;
 	
 	@OneToMany(mappedBy = "examPeriod", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Exam> exams = new HashSet<Exam>();
@@ -49,7 +49,7 @@ public class ExamPeriod {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(java.sql.Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -57,7 +57,7 @@ public class ExamPeriod {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(java.sql.Date endDate) {
 		this.endDate = endDate;
 	}
 	
