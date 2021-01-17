@@ -1,7 +1,5 @@
 package eservis.app.web.dto;
 
-import java.util.Date;
-
 import eservis.app.model.Exam;
 
 public class ExamDTO {
@@ -9,7 +7,7 @@ public class ExamDTO {
 	private Long id;
     private Integer examPoints;
     private Integer labPoints;
-    private Date datum;
+    private java.sql.Date datum;
 	private CourseDTO course;
 	private StudentDTO student;
 	private ExamPeriodDTO examPeriod;
@@ -46,10 +44,10 @@ public class ExamDTO {
 	public void setLabPoints(Integer labPoints) {
 		this.labPoints = labPoints;
 	}
-	public Date getDatum() {
+	public java.sql.Date getDatum() {
 		return datum;
 	}
-	public void setDatum(Date datum) {
+	public void setDatum(java.sql.Date datum) {
 		this.datum = datum;
 	}
 	public CourseDTO getCourse() {

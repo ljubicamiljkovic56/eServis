@@ -1,6 +1,5 @@
 package eservis.app.model;
 
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +20,7 @@ public class Exam {
     
     private Integer labPoints;
     
-    private Date datum;
+    private java.sql.Date datum;
     
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Course course;
@@ -56,11 +55,11 @@ public class Exam {
 		this.labPoints = labPoints;
 	}
 
-	public Date getDatum() {
+	public java.sql.Date getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(java.sql.Date datum) {
 		this.datum = datum;
 	}
 
