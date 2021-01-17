@@ -7,8 +7,8 @@ import eservis.app.model.Enrollment;
 public class EnrollmentDTO {
 
 	private Long id;
-	private Date startDate;
-	private Date endDate;
+	private java.sql.Date startDate;
+	private java.sql.Date endDate;
 	private StudentDTO student;
 	private CourseDTO course;
 	
@@ -18,8 +18,8 @@ public class EnrollmentDTO {
 	
 	public EnrollmentDTO(Enrollment enrollment) {
 		id = enrollment.getId();
-		startDate = enrollment.getStartDate();
-		endDate = enrollment.getEndDate();
+		startDate = (java.sql.Date) enrollment.getStartDate();
+		endDate = (java.sql.Date) enrollment.getEndDate();
 		student = new StudentDTO(enrollment.getStudent());
 		course = new CourseDTO(enrollment.getCourse());
 	}	
@@ -33,13 +33,13 @@ public class EnrollmentDTO {
 	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(java.sql.Date startDate) {
 		this.startDate = startDate;
 	}
 	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(java.sql.Date endDate) {
 		this.endDate = endDate;
 	}
 	public StudentDTO getStudent() {

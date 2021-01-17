@@ -18,9 +18,9 @@ public class Enrollment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Date startDate;
+	private java.sql.Date startDate;
 	
-	private Date endDate;
+	private java.sql.Date endDate;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Course course;
@@ -40,7 +40,7 @@ public class Enrollment {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(java.sql.Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -48,7 +48,7 @@ public class Enrollment {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(java.sql.Date endDate) {
 		this.endDate = endDate;
 	}
 

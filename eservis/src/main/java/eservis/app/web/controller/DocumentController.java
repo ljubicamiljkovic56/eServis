@@ -73,8 +73,8 @@ public class DocumentController {
 			Type type = typeService.findOne(documentDTO.getType().getId());
 			
 			Document document = new Document();
-			document.setType(type);
 			document.setStudent(student);
+			document.setType(type);
 			document = documentService.save(document);
 			return new ResponseEntity<>(new DocumentDTO(document), HttpStatus.CREATED);	
 		}
@@ -91,8 +91,9 @@ public class DocumentController {
 			
 			Type type = typeService.findOne(documentDTO.getType().getId());
 			
-			document.setType(type);
+			
 			document.setStudent(student);
+			document.setType(type);
 			document = documentService.save(document);
 			return new ResponseEntity<>(new DocumentDTO(document), HttpStatus.OK);	
 		}

@@ -24,7 +24,7 @@ import eservis.app.web.dto.EnrollmentDTO;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value="api/enrollments")
+@RequestMapping(value = "api/enrollments")
 public class EnrollmentController {
 
 	@Autowired
@@ -36,6 +36,7 @@ public class EnrollmentController {
 	@Autowired
 	CourseService courseService;
 	
+	//get all
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<EnrollmentDTO>> getEnrollments(){
 		List<Enrollment> enrollments = enrollmentService.findAll();
@@ -46,8 +47,19 @@ public class EnrollmentController {
 		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentsDTO, HttpStatus.OK);
 	}
 	
+	//po id-u
+	@RequestMapping(value = "enrollmentDetails/{id}", method = RequestMethod.GET)
+	public ResponseEntity<EnrollmentDTO> getEnrollment(@PathVariable Long id){
+		Enrollment enrollment = enrollmentService.findOne(id);
+		if(enrollment == null){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(new EnrollmentDTO(enrollment), HttpStatus.OK);
+	}
+	
 	//dodaj pohadjanje kursa
-	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<EnrollmentDTO> createEnrollment(
 			@RequestBody EnrollmentDTO enrollmentDTO) {
 		//a new enrollment must have student and course defined
@@ -72,8 +84,8 @@ public class EnrollmentController {
 	
 	
 	//izmeni pohadjanje kursa
-	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
-	public ResponseEntity<EnrollmentDTO> updateEnrollment(
+	@RequestMapping(value = "updateEnrollment/{id}", method = RequestMethod.PUT, consumes="application/json")
+	public ResponseEntity<EnrollmentDTO> updateEnrollment(@PathVariable("id") long id,
 			@RequestBody EnrollmentDTO enrollmentDTO){
 		//an enrollment must exist
 		Enrollment enrollment = enrollmentService.findOne(enrollmentDTO.getId()); 
@@ -90,7 +102,7 @@ public class EnrollmentController {
 	
 	
 	//obrisi pohadjanje kursa
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value = "deleteEnrollment/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteEnrollment(@PathVariable Long id){
 		Enrollment enrollment = enrollmentService.findOne(id);
 		if (enrollment != null){

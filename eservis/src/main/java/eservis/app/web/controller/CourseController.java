@@ -1,5 +1,6 @@
 package eservis.app.web.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -118,8 +119,8 @@ public class CourseController {
 		for (Enrollment e: enrollments) {
 			EnrollmentDTO enrollmentDTO = new EnrollmentDTO();
 			enrollmentDTO.setId(e.getId());
-			enrollmentDTO.setStartDate(e.getStartDate());
-			enrollmentDTO.setEndDate(e.getEndDate());
+			enrollmentDTO.setStartDate((Date) e.getStartDate());
+			enrollmentDTO.setEndDate((Date) e.getEndDate());
 			enrollmentDTO.setStudent(new StudentDTO(e.getStudent()));
 			//we leave course field empty
 			
