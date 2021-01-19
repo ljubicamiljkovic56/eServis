@@ -26,22 +26,22 @@ insert into authority (name) values ('ROLE_ADMIN');
 insert into authority (name) values ('ROLE_STUDENT');
 insert into authority (name) values ('ROLE_TEACHER');
 
-insert into user (username, password) values ('admin1', '123');
-insert into user (username, password) values ('admin2', '123');
+insert into user (username, password, authority_id) values ('admin1', '123', 1);
+insert into user (username, password, authority_id) values ('admin2', '123', 1);
 
-insert into user (username, password) values ('sf1-2017', '123');
-insert into user (username, password) values ('sf2-2017', '123');
-insert into user (username, password) values ('sf3-2017', '123');
-insert into user (username, password) values ('sf4-2017', '123');
-insert into user (username, password) values ('sf5-2017', '123');
-insert into user (username, password) values ('sf6-2017', '123');
-insert into user (username, password) values ('sf7-2017', '123');
-insert into user (username, password) values ('sf8-2017', '123');
-insert into user (username, password) values ('sf9-2017', '123');
+insert into user (username, password, authority_id) values ('sf1-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf2-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf3-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf4-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf5-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf6-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf7-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf8-2017', '123', 2);
+insert into user (username, password, authority_id) values ('sf9-2017', '123', 2);
 
-insert into user (username, password) values ('teacher1', '123');
-insert into user (username, password) values ('teacher2', '123');
-insert into user (username, password) values ('teacher3', '123');
+insert into user (username, password, authority_id) values ('teacher1', '123', 3);
+insert into user (username, password, authority_id) values ('teacher2', '123', 3);
+insert into user (username, password, authority_id) values ('teacher3', '123', 3);
 
 
 

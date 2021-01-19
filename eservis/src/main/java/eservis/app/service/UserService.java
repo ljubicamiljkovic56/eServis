@@ -24,6 +24,11 @@ public class UserService {
 	public User save(User user) {
 		return userRepository.save(user);
 	}
+	
+	public User findByUsernameAndPassword(String username, String password) {
+		return userRepository.findByUsernameAndPassword(username, password);
+	}
+
 
 	public void remove(Long id) {
 		userRepository.deleteById(id);
