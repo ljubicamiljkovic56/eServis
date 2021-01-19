@@ -3,8 +3,9 @@ package eservis.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import eservis.app.model.Enrollment;
 import eservis.app.repository.EnrollmentRepository;
 
@@ -20,6 +21,10 @@ public class EnrollmentService {
 
 	public List<Enrollment> findAll() {
 		return enrollmentRepository.findAll();
+	}
+	
+	public Page<Enrollment> findAll(Pageable page) {
+		return enrollmentRepository.findAll(page);
 	}
 	
 	public Enrollment save(Enrollment enrollment) {

@@ -1,6 +1,7 @@
 package eservis.app.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,38 +18,21 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Student student;
-
 	private String svrha;
-	
-	private String primalac;
 	
 	private double amount;
 	
-	private String racun;
-	
-	private int model;
-	
-	private String pozivNaBroj;
-	
 	private Date datum;
 	
-	
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private Student student;
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
 	}
 
 	public String getSvrha() {
@@ -59,44 +43,12 @@ public class Payment {
 		this.svrha = svrha;
 	}
 
-	public String getPrimalac() {
-		return primalac;
-	}
-
-	public void setPrimalac(String primalac) {
-		this.primalac = primalac;
-	}
-
 	public double getAmount() {
 		return amount;
 	}
 
 	public void setAmount(double amount) {
 		this.amount = amount;
-	}
-
-	public String getRacun() {
-		return racun;
-	}
-
-	public void setRacun(String racun) {
-		this.racun = racun;
-	}
-
-	public int getModel() {
-		return model;
-	}
-
-	public void setModel(int model) {
-		this.model = model;
-	}
-
-	public String getPozivNaBroj() {
-		return pozivNaBroj;
-	}
-
-	public void setPozivNaBroj(String pozivNaBroj) {
-		this.pozivNaBroj = pozivNaBroj;
 	}
 
 	public Date getDatum() {
@@ -107,12 +59,41 @@ public class Payment {
 		this.datum = datum;
 	}
 
-	@Override
-	public String toString() {
-		return "Payment [id=" + id + ", student=" + student + ", svrha=" + svrha + ", primalac=" + primalac
-				+ ", amount=" + amount + ", racun=" + racun + ", model=" + model + ", pozivNaBroj=" + pozivNaBroj
-				+ ", datum=" + datum + "]";
+	public Student getStudent() {
+		return student;
 	}
 
+	public void setStudent(Student student) {
+		this.student = student;
+	}
 	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Payment p = (Payment) o;
+        if(p.id == null || id == null) {
+            return false;
+        }
+        return Objects.equals(id, p.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+	@Override
+	public String toString() {
+		return "Payment [id=" + id + ", svrha=" + svrha + ", amount=" + amount + ", datum=" + datum + ", student="
+				+ student + "]";
+	}
+	
+	
+	
+
 }

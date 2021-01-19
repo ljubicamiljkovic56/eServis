@@ -3,6 +3,8 @@ package eservis.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import eservis.app.model.Payment;
@@ -22,6 +24,10 @@ public class PaymentService {
 		return paymentRepository.findAll();
 	}
 	
+	public Page<Payment> findAll(Pageable page) {
+		return paymentRepository.findAll(page);
+	}
+
 	public Payment save(Payment payment) {
 		return paymentRepository.save(payment);
 	}
@@ -29,6 +35,5 @@ public class PaymentService {
 	public void remove(Long id) {
 		paymentRepository.deleteById(id);
 	}
-
 
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,7 +25,7 @@ import eservis.app.web.dto.DocumentDTO;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value="api/documents")
+@RequestMapping(value = "api/documents")
 public class DocumentController {
 	
 	@Autowired
@@ -35,7 +37,7 @@ public class DocumentController {
 	@Autowired
 	private TypeService typeService;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<DocumentDTO>> getDocuments(){
 		List<Document> documents = documentService.findAll();
 		
@@ -45,6 +47,17 @@ public class DocumentController {
 		}
 		
 		return new ResponseEntity<List<DocumentDTO>>(documentsDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<DocumentDTO>> getDocumentsPage(Pageable page) {
+		Page<Document> documents =  documentService.findAll(page);
+		
+		List<DocumentDTO> documentsDTO = new ArrayList<>();
+		for (Document doc : documents) {
+			documentsDTO.add(new DocumentDTO(doc));
+		}
+		return new ResponseEntity<>(documentsDTO, HttpStatus.OK);
 	}
 	
 	//po id-u

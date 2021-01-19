@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,7 +44,7 @@ public class ExamController {
 	ExamPeriodService examPeriodService;
 	
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<ExamDTO>> getExams(){
 		List<Exam> exams = examService.findAll();
 		List<ExamDTO> examsDTO = new ArrayList<ExamDTO>();
@@ -50,6 +52,17 @@ public class ExamController {
 			examsDTO.add(new ExamDTO(e));
 		}
 		return new ResponseEntity<List<ExamDTO>>(examsDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<ExamDTO>> getExamsPage(Pageable page) {
+		Page<Exam> exams =  examService.findAll(page);
+		
+		List<ExamDTO> examsDTO = new ArrayList<>();
+		for (Exam exam : exams) {
+			examsDTO.add(new ExamDTO(exam));
+		}
+		return new ResponseEntity<>(examsDTO, HttpStatus.OK);
 	}
 	
 	//po id-u

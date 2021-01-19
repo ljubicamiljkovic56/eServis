@@ -35,6 +35,9 @@ public class Student {
 	
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Document> documents = new HashSet<Document>();
+	
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Payment> payments = new HashSet<Payment>();
 
 	public Long getId() {
 		return id;
@@ -93,6 +96,16 @@ public class Student {
 	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
 	}
+	
+	
+
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -116,7 +129,9 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", cardNumber=" + cardNumber
-				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "Student [id=" + id + ", cardNumber=" + cardNumber + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", enrollments=" + enrollments + ", exams=" + exams + ", documents=" + documents
+				+ ", payments=" + payments + "]";
 	}
+
 }

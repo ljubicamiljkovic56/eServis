@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,13 +41,24 @@ public class CourseController {
 	private TeacherService teacherService;
 	
 	//svi kursevi
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<CourseDTO>> getCourses() {
 		List<Course> courses = courseService.findAll();
 		//convert courses to DTOs
 		List<CourseDTO> coursesDTO = new ArrayList<CourseDTO>();
 		for (Course s : courses) {
 			coursesDTO.add(new CourseDTO(s));
+		}
+		return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CourseDTO>> getCoursesPage(Pageable page) {
+		Page<Course> courses =  courseService.findAll(page);
+		
+		List<CourseDTO> coursesDTO = new ArrayList<>();
+		for (Course course : courses) {
+			coursesDTO.add(new CourseDTO(course));
 		}
 		return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
 	}

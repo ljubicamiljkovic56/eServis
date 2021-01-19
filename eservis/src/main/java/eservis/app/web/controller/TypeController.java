@@ -35,6 +35,8 @@ public class TypeController {
 		return new ResponseEntity<>(typesDTO, HttpStatus.OK);
 	}
 	
+	
+	
 	//po id-u
 	@RequestMapping(value = "typeDetails/{id}", method = RequestMethod.GET)
 	public ResponseEntity<TypeDTO> getType(@PathVariable Long id){

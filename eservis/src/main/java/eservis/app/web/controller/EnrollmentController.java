@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,7 +39,7 @@ public class EnrollmentController {
 	CourseService courseService;
 	
 	//get all
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<EnrollmentDTO>> getEnrollments(){
 		List<Enrollment> enrollments = enrollmentService.findAll();
 		List<EnrollmentDTO> enrollmentsDTO = new ArrayList<EnrollmentDTO>();
@@ -45,6 +47,17 @@ public class EnrollmentController {
 			enrollmentsDTO.add(new EnrollmentDTO(en));
 		}
 		return new ResponseEntity<List<EnrollmentDTO>>(enrollmentsDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<EnrollmentDTO>> getEnrollmentsPage(Pageable page) {
+		Page<Enrollment> enrollments =  enrollmentService.findAll(page);
+		
+		List<EnrollmentDTO> enrollmentsDTO = new ArrayList<>();
+		for (Enrollment enroll : enrollments) {
+			enrollmentsDTO.add(new EnrollmentDTO(enroll));
+		}
+		return new ResponseEntity<>(enrollmentsDTO, HttpStatus.OK);
 	}
 	
 	//po id-u
