@@ -122,20 +122,21 @@ public class CourseController {
 		}
 	}
 	
-	//
+	//studenti koji pohadjaju odredjeni predmet
 	@RequestMapping(value = "/{courseId}/students", method = RequestMethod.GET)
 	public ResponseEntity<List<EnrollmentDTO>> getCourseStudents(
 			@PathVariable Long courseId) {
 		Course course = courseService.findOne(courseId);
+		
 		Set<Enrollment> enrollments = course.getEnrollments();
 		List<EnrollmentDTO> enrollmentsDTO = new ArrayList<>();
+		
 		for (Enrollment e: enrollments) {
 			EnrollmentDTO enrollmentDTO = new EnrollmentDTO();
 			enrollmentDTO.setId(e.getId());
 			enrollmentDTO.setStartDate((Date) e.getStartDate());
 			enrollmentDTO.setEndDate((Date) e.getEndDate());
 			enrollmentDTO.setStudent(new StudentDTO(e.getStudent()));
-			//we leave course field empty
 			
 			enrollmentsDTO.add(enrollmentDTO);
 		}

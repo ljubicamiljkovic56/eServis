@@ -100,15 +100,20 @@ public class EnrollmentController {
 	@RequestMapping(value = "updateEnrollment/{id}", method = RequestMethod.PUT, consumes="application/json")
 	public ResponseEntity<EnrollmentDTO> updateEnrollment(@PathVariable("id") long id,
 			@RequestBody EnrollmentDTO enrollmentDTO){
-		//an enrollment must exist
+		
 		Enrollment enrollment = enrollmentService.findOne(enrollmentDTO.getId()); 
 		if (enrollment == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		//we allow changing startDate and endDate for an enrollment only
+		
+		Course course = courseService.findOne(enrollmentDTO.getCourse().getId());
+		
+		Student student = studentService.findOne(enrollmentDTO.getStudent().getId());
+		
 		enrollment.setStartDate((Date) enrollmentDTO.getStartDate());
 		enrollment.setEndDate((Date) enrollmentDTO.getEndDate());
-	
+		enrollment.setCourse(course);
+		enrollment.setStudent(student);
 		enrollment = enrollmentService.save(enrollment);
 		return new ResponseEntity<>(new EnrollmentDTO(enrollment), HttpStatus.OK);	
 	}
