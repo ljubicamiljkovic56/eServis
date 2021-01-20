@@ -46,8 +46,6 @@ public class ExamPeriodController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ExamPeriodDTO>> getExamPeriodsPage(Pageable page) {
-		//page object holds data about pagination and sorting
-		//the object is created based on the url parameters "page", "size" and "sort" 
 		Page<ExamPeriod> examPeriods = examPeriodService.findAll(page);
 		
 		//convert examPeriods to DTOs
@@ -83,7 +81,7 @@ public class ExamPeriodController {
 	@RequestMapping(value = "updateExamPeriod/{id}", method = RequestMethod.PUT, consumes = "application/json")
 	public ResponseEntity<ExamPeriodDTO> updateExamPeriod(@PathVariable("id") long id,
 			@RequestBody ExamPeriodDTO examPeriodDTO){
-		//a examPeriod must exist
+		
 		ExamPeriod examPeriod = examPeriodService.findOne(examPeriodDTO.getId()); 
 		if (examPeriod == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
