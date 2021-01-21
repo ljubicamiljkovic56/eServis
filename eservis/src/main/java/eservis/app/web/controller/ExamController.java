@@ -107,12 +107,10 @@ public class ExamController {
 	//izmeni ispit
 	@RequestMapping(value = "updateExam/{id}", method = RequestMethod.PUT, consumes = "application/json")
 	public ResponseEntity<ExamDTO> updateExam(@PathVariable("id") long id, @RequestBody ExamDTO examDTO) {
-		// an exam must exist
 		Exam exam = examService.findOne(examDTO.getId());
 		if (exam == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		// we allow changing date and points for an exam only
 		exam.setDatum((Date) examDTO.getDatum());
 		exam.setExamPoints(examDTO.getExamPoints());
 		exam.setLabPoints(examDTO.getLabPoints());

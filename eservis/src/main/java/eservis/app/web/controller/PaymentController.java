@@ -83,8 +83,8 @@ public class PaymentController {
 		Student student =  studentService.findOne(paymentDTO.getStudent().getId());
 		
 		payment.setSvrha(paymentDTO.getSvrha());
-		payment.setAmount(payment.getAmount());
-		payment.setDatum(payment.getDatum());
+		payment.setAmount(paymentDTO.getAmount());
+		payment.setDatum(paymentDTO.getDatum());
 		payment.setStudent(student);
 		payment = paymentService.save(payment);
 		return new ResponseEntity<>(new PaymentDTO(payment), HttpStatus.OK);	
