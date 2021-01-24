@@ -4,7 +4,7 @@ import eservis.app.model.Student;
 
 public class StudentDTO {
 
-private Long id;
+	private Long id;
 	
 	String cardNumber;
 	
@@ -21,12 +21,12 @@ private Long id;
 				student.getLastName());
 	}
 
-	public StudentDTO(Long id, String cardNumber, String firstName,
-			String lastName) {
+	public StudentDTO(Long id, String cardNumber, String firstName, String lastName) {
 		this.id = id;
 		this.cardNumber = cardNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
+
 	}
 
 	public Long getId() {
@@ -44,4 +44,6 @@ private Long id;
 	public String getLastName() {
 		return lastName;
 	}
+
+	
 }

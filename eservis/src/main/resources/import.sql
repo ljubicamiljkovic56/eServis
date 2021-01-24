@@ -2,7 +2,6 @@ use tseo;
 
 set foreign_key_checks = 0;
 
--- delete all rows
 truncate table user_authority;
 truncate table authority;
 truncate table user;
@@ -45,36 +44,35 @@ insert into user (username, password, authority_id) values ('teacher3', '123', 3
 
 
 
-insert into user_authority (user_id, authority_id) values (1, 1); 
-insert into user_authority (user_id, authority_id) values (2, 1);
+insert into user_authority (user_user_id, authority_id) values (1, 1); 
+insert into user_authority (user_user_id, authority_id) values (2, 1);
 
-insert into user_authority (user_id, authority_id) values (3, 2);
-insert into user_authority (user_id, authority_id) values (4, 2);
-insert into user_authority (user_id, authority_id) values (5, 2);
-insert into user_authority (user_id, authority_id) values (6, 2);
-insert into user_authority (user_id, authority_id) values (7, 2);
-insert into user_authority (user_id, authority_id) values (8, 2);
-insert into user_authority (user_id, authority_id) values (9, 2);
-insert into user_authority (user_id, authority_id) values (10, 2);
-insert into user_authority (user_id, authority_id) values (11, 2);
+insert into user_authority (user_user_id, authority_id) values (3, 2);
+insert into user_authority (user_user_id, authority_id) values (4, 2);
+insert into user_authority (user_user_id, authority_id) values (5, 2);
+insert into user_authority (user_user_id, authority_id) values (6, 2);
+insert into user_authority (user_user_id, authority_id) values (7, 2);
+insert into user_authority (user_user_id, authority_id) values (8, 2);
+insert into user_authority (user_user_id, authority_id) values (9, 2);
+insert into user_authority (user_user_id, authority_id) values (10, 2);
+insert into user_authority (user_user_id, authority_id) values (11, 2);
 
-insert into user_authority (user_id, authority_id) values (12, 3);
-insert into user_authority (user_id, authority_id) values (13, 3);
-insert into user_authority (user_id, authority_id) values (14, 3);
+insert into user_authority (user_user_id, authority_id) values (12, 3);
+insert into user_authority (user_user_id, authority_id) values (13, 3);
+insert into user_authority (user_user_id, authority_id) values (14, 3);
 
 
 
-insert into student (card_number, first_name, last_name) values ('sf1-2014', 'Marko', 'Marković');
-insert into student (card_number, first_name, last_name) values ('sf2-2014', 'Milan', 'Milanović');
-insert into student (card_number, first_name, last_name) values ('sf3-2014', 'Ivana', 'Novaković');
-insert into student (card_number, first_name, last_name) values ('sf4-2014', 'Bojan', 'Bojić');
-insert into student (card_number, first_name, last_name) values ('sf5-2014', 'Jelena', 'Marković');
-insert into student (card_number, first_name, last_name) values ('sf6-2014', 'Zoran', 'Zoranović');
-insert into student (card_number, first_name, last_name) values ('sf7-2014', 'Milica', 'Petrović');
-insert into student (card_number, first_name, last_name) values ('sf8-2014', 'Petar', 'Petrović');
-insert into student (card_number, first_name, last_name) values ('sf9-2014', 'Igor', 'Jovin');
+insert into student (card_number, first_name, last_name, user_id) values ('sf1-2014', 'Marko', 'Marković', 3);
+insert into student (card_number, first_name, last_name, user_id) values ('sf2-2014', 'Milan', 'Milanović', 4);
+insert into student (card_number, first_name, last_name, user_id) values ('sf3-2014', 'Ivana', 'Novaković', 5);
+insert into student (card_number, first_name, last_name, user_id) values ('sf4-2014', 'Bojan', 'Bojić', 6);
+insert into student (card_number, first_name, last_name, user_id) values ('sf5-2014', 'Jelena', 'Marković', 7);
+insert into student (card_number, first_name, last_name, user_id) values ('sf6-2014', 'Zoran', 'Zoranović', 8);
+insert into student (card_number, first_name, last_name, user_id) values ('sf7-2014', 'Milica', 'Petrović', 9);
+insert into student (card_number, first_name, last_name, user_id) values ('sf8-2014', 'Petar', 'Petrović', 10);
+insert into student (card_number, first_name, last_name, user_id) values ('sf9-2014', 'Igor', 'Jovin', 11);
 
--- tbl za dokumente i tipove dokumenata
 insert into type(name) values ('UPISNICA');
 insert into type(name) values ('ISPISNICA');
 insert into type(name) values ('DIPLOMA');
@@ -87,9 +85,9 @@ insert into document (type_id, student_id) values (2, 1);
 
 
 
-insert into teacher (first_name, last_name, title) values ('Milan', 'Jovanovic', 'nastavnik');
-insert into teacher (first_name, last_name, title) values ('Sanja', 'Stanic', 'asistent');
-insert into teacher (first_name, last_name, title) values ('Nemanja', 'Jankovic', 'demonstrator');
+insert into teacher (first_name, last_name, title, user_id) values ('Milan', 'Jovanovic', 'nastavnik', 12);
+insert into teacher (first_name, last_name, title, user_id) values ('Sanja', 'Stanic', 'asistent', 13);
+insert into teacher (first_name, last_name, title, user_id) values ('Nemanja', 'Jankovic', 'demonstrator', 14);
 
 insert into course (name, espb, semester, teacher_id) values ('Matematika', 8, 'zimski', 1);
 insert into course (name, espb, semester, teacher_id) values ('Osnove programiranja', 8, 'zimski', 2);
@@ -132,38 +130,12 @@ insert into payment(svrha, amount, datum, student_id) values ('Prijava ispita', 
 insert into payment(svrha, amount, datum, student_id) values ('Overa semestra', 2000.0,'2020-06-05', 4);
 insert into payment(svrha, amount, datum, student_id) values ('Prijava ispita', 400.0, '2020-08-20', 5);
 insert into payment(svrha, amount, datum, student_id) values ('Prijava ispita', 800.0, '2020-05-27', 5);
-insert into payment(svrha, amount, datum, student_id) values ('Overa semestra', 2000.0, '2020-06-17', 6)
+insert into payment(svrha, amount, datum, student_id) values ('Overa semestra', 2000.0, '2020-06-17', 6);
 insert into payment(svrha, amount, datum, student_id) values ('Prijava ispita', 400.0, '2020-08-25', 6);
 insert into payment(svrha, amount, datum, student_id) values ('Overa semestra', 2000.0, '2020-06-17', 7);
 insert into payment(svrha, amount, datum, student_id) values ('Prijava ispita', 200.0, '2020-08-20', 7);
 insert into payment(svrha, amount, datum, student_id) values ('Prijava ispita', 600.0, '2020-08-27', 8);
 insert into payment(svrha, amount, datum, student_id) values ('Overa semestra', 2000.0, '2020-06-17', 8);
 	
- -- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
--- 	values (2, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-123', '2020-08-20');
-	-- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (3, 'Prijava ispita', 'FTN', 200.00, '840-1710666-12', 97, '33-99011-1-4532-144', '2020-08-27');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (3, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-168', '2020-06-17');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (4, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-188', '2020-08-25');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (4, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-188', '2020-06-05');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (5, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-134', '2020-08-20');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
--- values (5, 'Prijava ispita', 'FTN', 800.00, '840-1710666-12', 97, '33-99011-1-4532-134', '2020-05-27');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (6, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-160', '2020-06-17');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (6, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-160', '2020-08-25');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
--- 	values (7, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-170', '2020-06-05');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (7, 'Prijava ispita', 'FTN', 400.00, '840-1710666-12', 97, '33-99011-1-4532-170', '2020-08-20');
--- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (8, 'Prijava ispita', 'FTN', 600.00, '840-1710666-12', 97, '33-99011-1-4532-100', '2020-08-27');
-	-- insert into payment (student_id, svrha, receiver, amount, recievers_account, model, poziv_na_broj, payment_date) 
-	-- values (8, 'Overa semestra', 'FTN', 2000.00, '840-1710666-12', 97, '33-99011-1-4532-100', '2020-06-17');
 
 insert into lecture(course_id) values (1);

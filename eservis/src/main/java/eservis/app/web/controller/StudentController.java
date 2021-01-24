@@ -35,12 +35,10 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
-	
 	//svi studenti
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentDTO>> getAllStudents() {
 		List<Student> students = studentService.findAll();
-		//convert students to DTOs
 		List<StudentDTO> studentsDTO = new ArrayList<>();
 		for (Student s : students) {
 			studentsDTO.add(new StudentDTO(s));
@@ -50,11 +48,7 @@ public class StudentController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<StudentDTO>> getStudentsPage(Pageable page) {
-		//page object holds data about pagination and sorting
-		//the object is created based on the url parameters "page", "size" and "sort" 
 		Page<Student> students = studentService.findAll(page);
-		
-		//convert students to DTOs
 		List<StudentDTO> studentsDTO = new ArrayList<>();
 		for (Student s : students) {
 			studentsDTO.add(new StudentDTO(s));
@@ -74,12 +68,11 @@ public class StudentController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO){
+	public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO){		
 		Student student = new Student();
 		student.setCardNumber(studentDTO.getCardNumber());
 		student.setFirstName(studentDTO.getFirstName());
 		student.setLastName(studentDTO.getLastName());
-		
 		student = studentService.save(student);
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.CREATED);	
 	}

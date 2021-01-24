@@ -2,15 +2,9 @@ package eservis.app.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +16,7 @@ import eservis.app.model.User;
 import eservis.app.service.UserService;
 import eservis.app.web.dto.LoginDTO;
 import eservis.app.web.dto.UserDTO;
-import eservis.app.web.security.TokenUtils;
+//import eservis.app.web.security.TokenUtils;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -32,14 +26,17 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	AuthenticationManager authenticationManager;
+//	@Autowired
+//	private StudentService studentService;
+//	
+	//@Autowired
+	//AuthenticationManager authenticationManager;
 	
-	@Autowired
-	private UserDetailsService userDetailsService;
+	//@Autowired
+	//private UserDetailsService userDetailsService;
 	
-	@Autowired
-	TokenUtils tokenUtils;
+	//@Autowired
+	//TokenUtils tokenUtils;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
@@ -82,6 +79,19 @@ public class UserController {
 		}
 	
 	}
+	
+//	@GetMapping
+//	public ResponseEntity<Void> getUserID(@PathVariable("id") long id){
+//		String query = "SELECT id FROM user, student, teacher WHERE user.id = student.user_id "
+//				+ "OR user.id = teacher.user_id";
+//		return new ResponseEntity<Void>(HttpStatus.OK);
+//	}
+	
+//	@GetMapping(value = "/{id}")
+//	public ResponseEntity<?> getStudentByItsId(Principal principal, @PathVariable("id") long id){
+//		StudentDTO studentDTO = new StudentDTO(studentService.findOne(id));
+//		return new ResponseEntity<>(studentDTO, HttpStatus.OK);
+//	}
 	
 //	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
 //	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {

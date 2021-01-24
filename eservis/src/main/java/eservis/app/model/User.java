@@ -28,7 +28,8 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<UserAuthority> userAuthorities = new HashSet<UserAuthority>();
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -67,7 +68,6 @@ public class User {
 
 	public void setAuthority(Authority authority) {
 		this.authority = authority;
-	}	
-	
-	
+	}
+
 }
