@@ -1,9 +1,12 @@
 package eservis.app.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 @Entity
 public class Admin {
 
@@ -14,6 +17,9 @@ public class Admin {
 	private String firstname;
 	
 	private String lastname;
+	
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private User user;
 	
 	
 	public Admin() {
@@ -52,6 +58,18 @@ public class Admin {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", user=" + user + "]";
+	}
 	
 }

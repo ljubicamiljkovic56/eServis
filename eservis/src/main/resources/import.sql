@@ -44,24 +44,25 @@ insert into user (username, password, authority_id) values ('teacher3', '123', 3
 
 
 
-insert into user_authority (user_user_id, authority_id) values (1, 1); 
-insert into user_authority (user_user_id, authority_id) values (2, 1);
+insert into user_authority (user_id, authority_id) values (1, 1); 
+insert into user_authority (user_id, authority_id) values (2, 1);
 
-insert into user_authority (user_user_id, authority_id) values (3, 2);
-insert into user_authority (user_user_id, authority_id) values (4, 2);
-insert into user_authority (user_user_id, authority_id) values (5, 2);
-insert into user_authority (user_user_id, authority_id) values (6, 2);
-insert into user_authority (user_user_id, authority_id) values (7, 2);
-insert into user_authority (user_user_id, authority_id) values (8, 2);
-insert into user_authority (user_user_id, authority_id) values (9, 2);
-insert into user_authority (user_user_id, authority_id) values (10, 2);
-insert into user_authority (user_user_id, authority_id) values (11, 2);
+insert into user_authority (user_id, authority_id) values (3, 2);
+insert into user_authority (user_id, authority_id) values (4, 2);
+insert into user_authority (user_id, authority_id) values (5, 2);
+insert into user_authority (user_id, authority_id) values (6, 2);
+insert into user_authority (user_id, authority_id) values (7, 2);
+insert into user_authority (user_id, authority_id) values (8, 2);
+insert into user_authority (user_id, authority_id) values (9, 2);
+insert into user_authority (user_id, authority_id) values (10, 2);
+insert into user_authority (user_id, authority_id) values (11, 2);
 
-insert into user_authority (user_user_id, authority_id) values (12, 3);
-insert into user_authority (user_user_id, authority_id) values (13, 3);
-insert into user_authority (user_user_id, authority_id) values (14, 3);
+insert into user_authority (user_id, authority_id) values (12, 3);
+insert into user_authority (user_id, authority_id) values (13, 3);
+insert into user_authority (user_id, authority_id) values (14, 3);
 
-
+insert into admin(firstname, lastname, user_id) values ('Mile','Milić', 1);
+insert into admin(firstname, lastname, user_id) values ('Petar','Petrovic', 2);
 
 insert into student (card_number, first_name, last_name, user_id) values ('sf1-2014', 'Marko', 'Marković', 3);
 insert into student (card_number, first_name, last_name, user_id) values ('sf2-2014', 'Milan', 'Milanović', 4);

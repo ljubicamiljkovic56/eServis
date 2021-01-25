@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,6 +27,9 @@ public class Student {
 	private String firstName;
 
 	private String lastName;
+	
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private User user;
 
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Enrollment> enrollments = new HashSet<Enrollment>();
@@ -106,6 +110,14 @@ public class Student {
 	public void setPayments(Set<Payment> payments) {
 		this.payments = payments;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -130,8 +142,8 @@ public class Student {
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", cardNumber=" + cardNumber + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", enrollments=" + enrollments + ", exams=" + exams + ", documents=" + documents
-				+ ", payments=" + payments + "]";
+				+ lastName + ", user=" + user + ", enrollments=" + enrollments + ", exams=" + exams + ", documents="
+				+ documents + ", payments=" + payments + "]";
 	}
 
 }

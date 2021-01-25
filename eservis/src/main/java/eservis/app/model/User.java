@@ -29,6 +29,14 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<UserAuthority> userAuthorities = new HashSet<UserAuthority>();
 	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Admin> admins = new HashSet<Admin>();
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Student> students = new HashSet<Student>();
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Teacher> teachers = new HashSet<Teacher>();
 	
 	public Long getId() {
 		return id;
@@ -68,6 +76,30 @@ public class User {
 
 	public void setAuthority(Authority authority) {
 		this.authority = authority;
+	}
+
+	public Set<Admin> getAdmins() {
+		return admins;
+	}
+
+	public void setAdmins(Set<Admin> admins) {
+		this.admins = admins;
+	}
+
+	public Set<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
+
+	public Set<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	public void setTeachers(Set<Teacher> teachers) {
+		this.teachers = teachers;
 	}
 
 }

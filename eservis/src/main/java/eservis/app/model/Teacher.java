@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
@@ -26,6 +27,9 @@ public class Teacher {
 	private String lastName;
 	
 	private String title;
+	
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private User user;
 	
 	@OneToMany(mappedBy = "teachers", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Course> courses2 = new HashSet<Course>();
@@ -92,14 +96,6 @@ public class Teacher {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	@Override
-	public String toString() {
-		return "Teacher [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", title=" + title
-				+ ", courses=" + courses + "]";
-	}
-
-	
 	
 	public Set<Course> getCourses2() {
 		return courses2;
@@ -109,7 +105,19 @@ public class Teacher {
 		this.courses2 = courses2;
 	}
 
-	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", title=" + title
+				+ ", user=" + user + ", courses2=" + courses2 + ", courses=" + courses + "]";
+	}
 
 	
 }
