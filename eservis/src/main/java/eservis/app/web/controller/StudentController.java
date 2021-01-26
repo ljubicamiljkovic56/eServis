@@ -1,6 +1,10 @@
 package eservis.app.web.controller;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -21,13 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 import eservis.app.model.Enrollment;
 import eservis.app.model.Exam;
 import eservis.app.model.Student;
+
+import eservis.app.model.User;
 import eservis.app.service.StudentService;
+import eservis.app.service.UserService;
 import eservis.app.web.dto.CourseDTO;
 import eservis.app.web.dto.EnrollmentDTO;
 import eservis.app.web.dto.ExamDTO;
 import eservis.app.web.dto.ExamPeriodDTO;
 import eservis.app.web.dto.StudentDTO;
-
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value="api/students")
@@ -35,6 +41,10 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private UserService userService;
+	
 	//svi studenti
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<StudentDTO>> getAllStudents() {
@@ -65,6 +75,37 @@ public class StudentController {
 		}
 		
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "studentDetailsUserId/{userid}", method = RequestMethod.GET)
+	public ResponseEntity<StudentDTO> getStudentByUserId(@PathVariable("userid") Long id){
+		
+		User user = userService.findOne(id);
+		long userId = user.getId();
+		Student student = new Student();
+		
+		
+		try {
+			Connection con = null;
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tseo?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
+			Statement stmt = con.createStatement();
+			String sql = 
+					"select * from student WHERE student.user_id = " + userId + "";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				student.setId(rs.getLong("id"));
+				student.setCardNumber(rs.getString("card_number"));
+				student.setFirstName(rs.getString("first_name"));
+				student.setLastName(rs.getString("last_name"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return new ResponseEntity<StudentDTO>(new StudentDTO(student), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
@@ -127,8 +168,8 @@ public class StudentController {
 		return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
 	}	
 	
-	@RequestMapping(value = "/{studentId}/courses", method = RequestMethod.GET)
-	public ResponseEntity<List<EnrollmentDTO>> getStudentCourses(
+	@RequestMapping(value = "/{studentId}/enrollments", method = RequestMethod.GET)
+	public ResponseEntity<List<EnrollmentDTO>> getStudentEnrollments(
 			@PathVariable Long studentId) {
 		Student student = studentService.findOne(studentId);
 		Set<Enrollment> enrollments = student.getEnrollments();
@@ -139,7 +180,6 @@ public class StudentController {
 			enrollmentDTO.setStartDate((Date) e.getStartDate());
 			enrollmentDTO.setEndDate((Date) e.getEndDate());
 			enrollmentDTO.setCourse(new CourseDTO(e.getCourse()));
-			//we leave student field empty
 			
 			enrollmentsDTO.add(enrollmentDTO);
 		}

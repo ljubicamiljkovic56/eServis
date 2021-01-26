@@ -1,5 +1,9 @@
 package eservis.app.web.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eservis.app.model.Course;
 import eservis.app.model.Teacher;
+import eservis.app.model.User;
 import eservis.app.service.TeacherService;
+import eservis.app.service.UserService;
 import eservis.app.web.dto.CourseDTO;
 import eservis.app.web.dto.TeacherDTO;
 
@@ -29,6 +35,9 @@ public class TeacherController {
 	
 	@Autowired
 	private TeacherService teacherService;
+	
+	@Autowired
+	private UserService userService;
 	
 	//svi nastavnici
 	@RequestMapping(value="/all", method = RequestMethod.GET)
@@ -65,6 +74,38 @@ public class TeacherController {
 		}
 		
 		return new ResponseEntity<>(new TeacherDTO(teacher), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "teacherDetailsUserId/{userid}", method = RequestMethod.GET)
+	public ResponseEntity<TeacherDTO> getTeacherByUserId(@PathVariable("userid") Long id){
+		
+		User user = userService.findOne(id);
+		long userId = user.getId();
+		Teacher teacher = new Teacher();
+		
+		
+		try {
+			Connection con = null;
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tseo?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
+			Statement stmt = con.createStatement();
+			String sql = 
+					"select * from teacher WHERE teacher.user_id = " + userId + "";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				teacher.setId(rs.getLong("id"));
+				teacher.setFirstName(rs.getString("first_name"));
+				teacher.setLastName(rs.getString("last_name"));
+				teacher.setTitle(rs.getString("title"));
+				//teacher.setUser(rs.getString("user_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return new ResponseEntity<TeacherDTO>(new TeacherDTO(teacher), HttpStatus.OK);
 	}
 	
 	//dodaj nastavnika
