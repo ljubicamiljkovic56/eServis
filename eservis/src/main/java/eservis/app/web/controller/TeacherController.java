@@ -158,10 +158,15 @@ public class TeacherController {
 	public ResponseEntity<List<CourseDTO>> getTeacherCourses(
 			@PathVariable Long teacherId) {
 		Teacher teacher = teacherService.findOne(teacherId);
-		Set<Course> courses = teacher.getCourses();
+		Set<Course> courses = teacher.getCourses2();
 		List<CourseDTO> coursesDTO = new ArrayList<>();
 		for (Course c: courses) {
-			coursesDTO.add(new CourseDTO(c));
+			CourseDTO courseDTO = new CourseDTO();
+			courseDTO.setId(c.getId());
+			courseDTO.setName(c.getName());
+			courseDTO.setEspb(c.getEspb());
+			courseDTO.setSemester(c.getSemester());
+			coursesDTO.add(courseDTO);
 		}
 		return new ResponseEntity<>(coursesDTO, HttpStatus.OK);
 	}

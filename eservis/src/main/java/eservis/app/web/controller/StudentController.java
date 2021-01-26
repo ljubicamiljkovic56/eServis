@@ -22,18 +22,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import eservis.app.model.Document;
 import eservis.app.model.Enrollment;
 import eservis.app.model.Exam;
+import eservis.app.model.Payment;
 import eservis.app.model.Student;
 
 import eservis.app.model.User;
 import eservis.app.service.StudentService;
 import eservis.app.service.UserService;
 import eservis.app.web.dto.CourseDTO;
+import eservis.app.web.dto.DocumentDTO;
 import eservis.app.web.dto.EnrollmentDTO;
 import eservis.app.web.dto.ExamDTO;
 import eservis.app.web.dto.ExamPeriodDTO;
+import eservis.app.web.dto.PaymentDTO;
 import eservis.app.web.dto.StudentDTO;
+import eservis.app.web.dto.TypeDTO;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value="api/students")
@@ -168,6 +173,7 @@ public class StudentController {
 		return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
 	}	
 	
+	//sta student pohadja od predmeta
 	@RequestMapping(value = "/{studentId}/enrollments", method = RequestMethod.GET)
 	public ResponseEntity<List<EnrollmentDTO>> getStudentEnrollments(
 			@PathVariable Long studentId) {
@@ -186,6 +192,7 @@ public class StudentController {
 		return new ResponseEntity<>(enrollmentsDTO, HttpStatus.OK);
 	}
 	
+	//studentovi ispiti
 	@RequestMapping(value = "/{studentId}/exams", method = RequestMethod.GET)
 	public ResponseEntity<List<ExamDTO>> getStudentExams(
 			@PathVariable Long studentId) {
@@ -207,4 +214,42 @@ public class StudentController {
 	}
 
 
+	//studentove uplate
+	@RequestMapping(value = "/{studentId}/payments", method = RequestMethod.GET)
+	public ResponseEntity<List<PaymentDTO>> getStudentPayments(@PathVariable Long studentId) {
+		
+		Student student = studentService.findOne(studentId);
+		Set<Payment> payments = student.getPayments();
+		List<PaymentDTO> paymentsDTO = new ArrayList<>();
+		for (Payment p : payments) {
+			PaymentDTO paymentDTO = new PaymentDTO();
+			paymentDTO.setId(p.getId());
+			paymentDTO.setSvrha(p.getSvrha());
+			paymentDTO.setAmount(p.getAmount());
+			paymentDTO.setDatum(p.getDatum());
+		
+			paymentsDTO.add(paymentDTO);
+		}
+		return new ResponseEntity<>(paymentsDTO, HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value = "/{studentId}/documents", method = RequestMethod.GET)
+	public ResponseEntity<List<DocumentDTO>> getStudentDocuments(@PathVariable Long studentId) {
+		
+		Student student = studentService.findOne(studentId);
+		Set<Document> documents = student.getDocuments();
+		List<DocumentDTO> documentsDTO = new ArrayList<>();
+		for (Document d : documents) {
+			DocumentDTO documentDTO = new DocumentDTO();
+			documentDTO.setId(d.getId());
+			documentDTO.setStudent(new StudentDTO(d.getStudent()));
+			documentDTO.setType(new TypeDTO(d.getType()));
+			
+			documentsDTO.add(documentDTO);
+			
+		}
+		return new ResponseEntity<>(documentsDTO, HttpStatus.OK);
+		
+	}
 }
