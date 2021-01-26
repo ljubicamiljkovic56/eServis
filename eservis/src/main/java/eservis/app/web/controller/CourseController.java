@@ -123,8 +123,8 @@ public class CourseController {
 	}
 	
 	//studenti koji pohadjaju odredjeni predmet
-	@RequestMapping(value = "/{courseId}/students", method = RequestMethod.GET)
-	public ResponseEntity<List<EnrollmentDTO>> getCourseStudents(
+	@RequestMapping(value = "/{courseId}/enrollments", method = RequestMethod.GET)
+	public ResponseEntity<List<EnrollmentDTO>> getCourseEnrollments(
 			@PathVariable Long courseId) {
 		Course course = courseService.findOne(courseId);
 		
@@ -137,14 +137,16 @@ public class CourseController {
 			enrollmentDTO.setStartDate((Date) e.getStartDate());
 			enrollmentDTO.setEndDate((Date) e.getEndDate());
 			enrollmentDTO.setStudent(new StudentDTO(e.getStudent()));
-			
+			enrollmentDTO.setCourse(new CourseDTO(e.getCourse()));
 			enrollmentsDTO.add(enrollmentDTO);
 		}
 		return new ResponseEntity<>(enrollmentsDTO, HttpStatus.OK);
 	}
 	
+	
+	//svi ispiti tog kursa
 	@RequestMapping(value = "/{courseId}/exams", method = RequestMethod.GET)
-	public ResponseEntity<List<ExamDTO>> getStudentExams(
+	public ResponseEntity<List<ExamDTO>> getCourseExams(
 			@PathVariable Long courseId) {
 		Course course = courseService.findOne(courseId);
 		Set<Exam> exams = course.getExams();

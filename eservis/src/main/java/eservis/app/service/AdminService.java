@@ -3,10 +3,11 @@ package eservis.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import eservis.app.model.Admin;
-
 import eservis.app.repository.AdminRepository;
 
 @Service
@@ -21,6 +22,10 @@ public class AdminService {
 	
 	public List<Admin> findAll() {
 		return adminRepository.findAll();
+	}
+	
+	public Page<Admin> findAll(Pageable page) {
+		return adminRepository.findAll(page);
 	}
 	
 	public Admin save(Admin admin) {

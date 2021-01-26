@@ -36,7 +36,7 @@ public class ExamPeriodController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<ExamPeriodDTO>> getAllExamPeriods() {
 		List<ExamPeriod> examPeriods = examPeriodService.findAll();
-		//convert examPeriods to DTOs
+		
 		List<ExamPeriodDTO> examPeriodsDTO = new ArrayList<>();
 		for (ExamPeriod s : examPeriods) {
 			examPeriodsDTO.add(new ExamPeriodDTO(s));
@@ -48,7 +48,7 @@ public class ExamPeriodController {
 	public ResponseEntity<List<ExamPeriodDTO>> getExamPeriodsPage(Pageable page) {
 		Page<ExamPeriod> examPeriods = examPeriodService.findAll(page);
 		
-		//convert examPeriods to DTOs
+		
 		List<ExamPeriodDTO> examPeriodsDTO = new ArrayList<>();
 		for (ExamPeriod s : examPeriods) {
 			examPeriodsDTO.add(new ExamPeriodDTO(s));
@@ -106,6 +106,8 @@ public class ExamPeriodController {
 		}
 	}
 	
+	
+	//svi ispiti nekog ispitnog perioda
 	@RequestMapping(value = "/{examPeriodId}/exams", method = RequestMethod.GET)
 	public ResponseEntity<List<ExamDTO>> getExamPeriodExams(
 			@PathVariable Long examPeriodId) {

@@ -1,5 +1,7 @@
 package eservis.app.web.dto;
 
+import eservis.app.model.Admin;
+
 public class AdminDTO {
 	
 	private Long id;
@@ -10,11 +12,11 @@ public class AdminDTO {
 		
 	}
 
-	public AdminDTO(Long id, String firstname, String lastname) {
+	public AdminDTO(Admin admin) {
 		super();
-		this.id = id;
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.id = admin.getId();
+		this.firstname = admin.getFirstname();
+		this.lastname = admin.getLastname();
 	}
 
 	public Long getId() {

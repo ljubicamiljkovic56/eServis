@@ -64,15 +64,15 @@ insert into user_authority (user_id, authority_id) values (14, 3);
 insert into admin(firstname, lastname, user_id) values ('Mile','Milić', 1);
 insert into admin(firstname, lastname, user_id) values ('Petar','Petrovic', 2);
 
-insert into student (card_number, first_name, last_name, user_id) values ('sf1-2014', 'Marko', 'Marković', 3);
-insert into student (card_number, first_name, last_name, user_id) values ('sf2-2014', 'Milan', 'Milanović', 4);
-insert into student (card_number, first_name, last_name, user_id) values ('sf3-2014', 'Ivana', 'Novaković', 5);
-insert into student (card_number, first_name, last_name, user_id) values ('sf4-2014', 'Bojan', 'Bojić', 6);
-insert into student (card_number, first_name, last_name, user_id) values ('sf5-2014', 'Jelena', 'Marković', 7);
-insert into student (card_number, first_name, last_name, user_id) values ('sf6-2014', 'Zoran', 'Zoranović', 8);
-insert into student (card_number, first_name, last_name, user_id) values ('sf7-2014', 'Milica', 'Petrović', 9);
-insert into student (card_number, first_name, last_name, user_id) values ('sf8-2014', 'Petar', 'Petrović', 10);
-insert into student (card_number, first_name, last_name, user_id) values ('sf9-2014', 'Igor', 'Jovin', 11);
+insert into student (card_number, first_name, last_name, user_id) values ('sf1-2017', 'Marko', 'Marković', 3);
+insert into student (card_number, first_name, last_name, user_id) values ('sf2-2017', 'Milan', 'Milanović', 4);
+insert into student (card_number, first_name, last_name, user_id) values ('sf3-2017', 'Ivana', 'Novaković', 5);
+insert into student (card_number, first_name, last_name, user_id) values ('sf4-2017', 'Bojan', 'Bojić', 6);
+insert into student (card_number, first_name, last_name, user_id) values ('sf5-2017', 'Jelena', 'Marković', 7);
+insert into student (card_number, first_name, last_name, user_id) values ('sf6-2017', 'Zoran', 'Zoranović', 8);
+insert into student (card_number, first_name, last_name, user_id) values ('sf7-2017', 'Milica', 'Petrović', 9);
+insert into student (card_number, first_name, last_name, user_id) values ('sf8-2017', 'Petar', 'Petrović', 10);
+insert into student (card_number, first_name, last_name, user_id) values ('sf9-2017', 'Igor', 'Jovin', 11);
 
 insert into type(name) values ('UPISNICA');
 insert into type(name) values ('ISPISNICA');
