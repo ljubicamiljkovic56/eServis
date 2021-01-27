@@ -20,9 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import eservis.app.model.Admin;
-
+import eservis.app.model.Authority;
 import eservis.app.model.User;
 import eservis.app.service.AdminService;
+import eservis.app.service.AuthorityService;
 import eservis.app.service.UserService;
 import eservis.app.web.dto.AdminDTO;
 
@@ -37,6 +38,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AuthorityService authorityService;
 	
 	//svi admini
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -108,19 +112,20 @@ public class AdminController {
 	//novi admin
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<AdminDTO> saveAdmin(@RequestBody AdminDTO adminDTO){
-//		if (courseDTO.getTeacher() == null) {
-//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//		}		
-		//Teacher teacher =  teacherService.findOne(courseDTO.getTeacher().getId());
 		
-//		User user = new User();
-//		user.setUsername(adminDTO.getFirstname());
-//		user.setPassword("123");
-//		user.setAuthority();
+		Authority authority = authorityService.findOne((long) 1);
 		
 		Admin admin = new Admin();
 		admin.setFirstname(adminDTO.getFirstname());
 		admin.setLastname(adminDTO.getLastname());
+		
+		User user = new User();
+		user.setUsername(admin.getFirstname());
+		user.setPassword("123");
+		user.setAuthority(authority);
+		userService.save(user);
+		
+		admin.setUser(user);
 		admin = adminService.save(admin);
 		
 		

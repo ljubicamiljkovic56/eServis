@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import eservis.app.model.Authority;
 import eservis.app.model.Document;
 import eservis.app.model.Enrollment;
 import eservis.app.model.Exam;
@@ -29,6 +30,7 @@ import eservis.app.model.Payment;
 import eservis.app.model.Student;
 
 import eservis.app.model.User;
+import eservis.app.service.AuthorityService;
 import eservis.app.service.StudentService;
 import eservis.app.service.UserService;
 import eservis.app.web.dto.CourseDTO;
@@ -49,6 +51,9 @@ public class StudentController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AuthorityService authorityService;
 	
 	//svi studenti
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -115,10 +120,22 @@ public class StudentController {
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO){		
+		
+		Authority authority = authorityService.findOne((long) 2);
+		
+		
 		Student student = new Student();
 		student.setCardNumber(studentDTO.getCardNumber());
 		student.setFirstName(studentDTO.getFirstName());
 		student.setLastName(studentDTO.getLastName());
+		
+		User user = new User();
+		user.setUsername(student.getCardNumber());
+		user.setPassword("123");
+		user.setAuthority(authority);
+		userService.save(user);
+		
+		student.setUser(user);
 		student = studentService.save(student);
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.CREATED);	
 	}
