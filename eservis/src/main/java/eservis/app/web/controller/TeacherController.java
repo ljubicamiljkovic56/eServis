@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import eservis.app.model.Authority;
 import eservis.app.model.Course;
 import eservis.app.model.Teacher;
 import eservis.app.model.User;
+import eservis.app.service.AuthorityService;
 import eservis.app.service.TeacherService;
 import eservis.app.service.UserService;
 import eservis.app.web.dto.CourseDTO;
@@ -38,6 +40,10 @@ public class TeacherController {
 	
 	@Autowired
 	private UserService userService;
+	
+	
+	@Autowired
+	private AuthorityService authorityService;
 	
 	//svi nastavnici
 	@RequestMapping(value="/all", method = RequestMethod.GET)
@@ -112,11 +118,20 @@ public class TeacherController {
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<TeacherDTO> saveTeacher(@RequestBody
 			TeacherDTO teacherDTO){
+		
+		Authority authority = authorityService.findOne((long) 3);
+		
 		Teacher teacher = new Teacher();
 		teacher.setFirstName(teacherDTO.getFirstName());
 		teacher.setLastName(teacherDTO.getLastName());
 		teacher.setTitle(teacherDTO.getTitle());
 		
+		User user = new User();
+		user.setUsername(teacher.getFirstName());
+		user.setPassword("123");
+		user.setAuthority(authority);
+		userService.save(user);
+		teacher.setUser(user);
 		teacher = teacherService.save(teacher);
 		return new ResponseEntity<>(new TeacherDTO(teacher), HttpStatus.CREATED);	
 	}

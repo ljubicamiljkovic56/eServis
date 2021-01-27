@@ -62,7 +62,7 @@ insert into user_authority (user_id, authority_id) values (13, 3);
 insert into user_authority (user_id, authority_id) values (14, 3);
 
 insert into admin(firstname, lastname, user_id) values ('Mile','Milić', 1);
-insert into admin(firstname, lastname, user_id) values ('Petar','Petrovic', 2);
+insert into admin(firstname, lastname, user_id) values ('Ivko','Petrovic', 2);
 
 insert into student (card_number, first_name, last_name, user_id) values ('sf1-2017', 'Marko', 'Marković', 3);
 insert into student (card_number, first_name, last_name, user_id) values ('sf2-2017', 'Milan', 'Milanović', 4);
