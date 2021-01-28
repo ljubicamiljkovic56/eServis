@@ -44,7 +44,6 @@ public class CourseController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<CourseDTO>> getCourses() {
 		List<Course> courses = courseService.findAll();
-		//convert courses to DTOs
 		List<CourseDTO> coursesDTO = new ArrayList<CourseDTO>();
 		for (Course s : courses) {
 			coursesDTO.add(new CourseDTO(s));

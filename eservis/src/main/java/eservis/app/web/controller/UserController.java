@@ -80,19 +80,6 @@ public class UserController {
 	
 	}
 	
-//	@GetMapping
-//	public ResponseEntity<Void> getUserID(@PathVariable("id") long id){
-//		String query = "SELECT id FROM user, student, teacher WHERE user.id = student.user_id "
-//				+ "OR user.id = teacher.user_id";
-//		return new ResponseEntity<Void>(HttpStatus.OK);
-//	}
-	
-//	@GetMapping(value = "/{id}")
-//	public ResponseEntity<?> getStudentByItsId(Principal principal, @PathVariable("id") long id){
-//		StudentDTO studentDTO = new StudentDTO(studentService.findOne(id));
-//		return new ResponseEntity<>(studentDTO, HttpStatus.OK);
-//	}
-	
 //	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
 //	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 //        try {

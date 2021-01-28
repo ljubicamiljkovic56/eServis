@@ -87,6 +87,7 @@ public class StudentController {
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);
 	}
 	
+	//student po userid-u
 	@RequestMapping(value = "studentDetailsUserId/{userid}", method = RequestMethod.GET)
 	public ResponseEntity<StudentDTO> getStudentByUserId(@PathVariable("userid") Long id){
 		
@@ -143,7 +144,7 @@ public class StudentController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "updateStudent/{id}", method = RequestMethod.PUT, consumes = "application/json")
 	public ResponseEntity<StudentDTO> updateStudent(@PathVariable("id") long id, @RequestBody StudentDTO studentDTO){
-		//a student must exist
+		
 		Student student = studentService.findOne(studentDTO.getId()); 
 		if (student == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -182,7 +183,7 @@ public class StudentController {
 	public ResponseEntity<List<StudentDTO>> getStudentsByLastName(
 			@RequestParam String lastName) {
 		List<Student> students = studentService.findByLastName(lastName);
-		//convert students to DTOs
+		
 		List<StudentDTO> studentsDTO = new ArrayList<>();
 		for (Student s : students) {
 			studentsDTO.add(new StudentDTO(s));
@@ -250,7 +251,7 @@ public class StudentController {
 		return new ResponseEntity<>(paymentsDTO, HttpStatus.OK);
 	}
 	
-	
+	//dokumenta studenta
 	@RequestMapping(value = "/{studentId}/documents", method = RequestMethod.GET)
 	public ResponseEntity<List<DocumentDTO>> getStudentDocuments(@PathVariable Long studentId) {
 		

@@ -75,7 +75,7 @@ public class EnrollmentController {
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<EnrollmentDTO> createEnrollment(
 			@RequestBody EnrollmentDTO enrollmentDTO) {
-		//a new enrollment must have student and course defined
+		
 		if (enrollmentDTO.getStudent() == null || enrollmentDTO.getCourse() == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}		

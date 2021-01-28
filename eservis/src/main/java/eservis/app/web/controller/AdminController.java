@@ -140,11 +140,9 @@ public class AdminController {
 		if (admin == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-	//	Teacher teacher =  teacherService.findOne(courseDTO.getTeacher().getId());
 		
 		admin.setFirstname(adminDTO.getFirstname());
 		admin.setLastname(adminDTO.getLastname());
-		//course.setTeacher(teacher);
 		admin = adminService.save(admin);
 		return new ResponseEntity<>(new AdminDTO(admin), HttpStatus.OK);	
 	}

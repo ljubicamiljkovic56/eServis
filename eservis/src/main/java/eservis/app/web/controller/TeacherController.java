@@ -82,6 +82,7 @@ public class TeacherController {
 		return new ResponseEntity<>(new TeacherDTO(teacher), HttpStatus.OK);
 	}
 	
+	//nastavnik po userid-u
 	@RequestMapping(value = "teacherDetailsUserId/{userid}", method = RequestMethod.GET)
 	public ResponseEntity<TeacherDTO> getTeacherByUserId(@PathVariable("userid") Long id){
 		

@@ -90,6 +90,20 @@ public class PaymentController {
 		return new ResponseEntity<>(new PaymentDTO(payment), HttpStatus.OK);	
 	}
 	
+	@RequestMapping(value = "addStudentPayment/{studentId}", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<PaymentDTO> addStudentPayment(@PathVariable long studentId, @RequestBody PaymentDTO paymentDTO){
+		
+		Student student =  studentService.findOne(studentId);
+		
+		Payment payment = new Payment();
+		payment.setSvrha(paymentDTO.getSvrha());
+		payment.setAmount(paymentDTO.getAmount());
+		payment.setDatum(paymentDTO.getDatum());
+		payment.setStudent(student);
+		payment = paymentService.save(payment);
+		return new ResponseEntity<>(new PaymentDTO(payment), HttpStatus.CREATED);	
+	}
+	
 	
 	//obrisi uplatu
 	@RequestMapping(value = "deletePayment/{id}", method = RequestMethod.DELETE)
